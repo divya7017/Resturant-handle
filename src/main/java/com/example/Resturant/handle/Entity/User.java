@@ -8,14 +8,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.security.PrivateKey;
 
 @Data
-@Document(collection = "users")
 public class User {
 
   private ObjectId Id;
   private String username;
   private String password;
   private String email;
-  private int securitypin;
   private String role;
-  private Boolean locked = true;
 }
