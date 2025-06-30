@@ -1,0 +1,24 @@
+package com.example.Resturant.handle.Controller;
+
+import com.example.Resturant.handle.Entity.MenuItem;
+import com.example.Resturant.handle.Service.MenuService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/menu")
+public class MenuController {
+
+    @Autowired
+    private MenuService menuService;
+
+    @PostMapping("add")
+    public ResponseEntity<String> addMenu(@RequestBody MenuItem menuItem){
+        return menuService.addMenuItem(menuItem);
+    }
+
+}

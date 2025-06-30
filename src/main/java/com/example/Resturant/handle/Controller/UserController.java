@@ -1,12 +1,18 @@
 package com.example.Resturant.handle.Controller;
 
 
-import com.example.Resturant.handle.Entity.ApprovedUser;
 import com.example.Resturant.handle.Entity.LogInRequest;
 import com.example.Resturant.handle.Entity.User;
+import com.example.Resturant.handle.Repo.UserRepo;
+import com.example.Resturant.handle.Service.JWTService;
 import com.example.Resturant.handle.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +24,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepo userRepo;
+
+    @Autowired
+    private JWTService jwtService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
     @PostMapping("/signup")
     public String newUser(@RequestBody User user) {
         userService.createNewUser(user);
@@ -25,37 +41,15 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public void loginrequest(@RequestBody LogInRequest request){
-        userService.login(request);
-    }
+    public ResponseEntity<?> login(@RequestBody LogInRequest loginRequest) {
+        User user = userRepo.findByUsername(loginRequest.getUsername()).orElseThrow();
 
-
-    @GetMapping("/User")
-    public List<ApprovedUser> showApprovedUser(){
-        return userService.getAllApprovUser();
-    }
-
-    @GetMapping("/unapproved")
-    public List<User> showUnapprovUser(){
-        return userService.getAllUnapprovUser();
-    }
-
-    @PostMapping("/unapproved_to_approved")
-    public ResponseEntity<String> unapprovedToApproved(@RequestBody Map<String, String> request){
-        String username = request.get("username");
-        userService.unapprovedtoapproved(username);
-        return ResponseEntity.ok("Approved Done");
-    }
-
-    @PostMapping("/approved_to_unapproved")
-    public ResponseEntity<String> approvedToUnapproved(@RequestBody Map<String, String> request) {
-        String username = request.get("username");
-        ResponseEntity<String> response = userService.approvedtounapproved(username);
-
-        // Print to terminal (console)
-        System.out.println("Response: " + response.getStatusCode() + " - " + response.getBody());
-
-        return response;
+        if (passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+            String token = jwtService.generateToken(user.getUsername(), user.getRole());
+            return ResponseEntity.ok(Map.of("token", token));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
     }
 
 }

@@ -5,9 +5,9 @@ import lombok.Data;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.security.PrivateKey;
 
 @Data
+@Document(collection = "User")
 public class User {
 
   private ObjectId Id;
