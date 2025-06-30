@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface MenuRepo extends MongoRepository<MenuItem, ObjectId> {
 
     Optional<MenuItem> findByName(String name);
+    void deleteByName(String name);
 }
