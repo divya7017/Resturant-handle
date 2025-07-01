@@ -13,6 +13,5 @@ public class MenuItem {
     private String category;
     private String name;
     private String discription;
-    private String Halfprice;
-    private String fullprice;
+    private String price;
 }

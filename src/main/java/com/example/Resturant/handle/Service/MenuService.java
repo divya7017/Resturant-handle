@@ -38,29 +38,13 @@ public class MenuService {
         items.setName(menuItem.get().getName());
         items.setCategory(menuItem.get().getCategory());
         items.setDiscription(menuItem.get().getDiscription());
-        items.setFullprice(fullNewPrice);
-        items.setHalfprice(menuItem.get().getHalfprice());
+        items.setPrice(fullNewPrice);
 
         menuRepo.save(items);
 
         return ResponseEntity.ok("Update Successfully");
     }
 
-    public ResponseEntity<String> menuHalfPriceChange(String name,String fullNewPrice) {
-        Optional<MenuItem> menuItem = menuRepo.findByName(name);
-
-        MenuItem items = new MenuItem();
-        items.setId(menuItem.get().getId());
-        items.setName(menuItem.get().getName());
-        items.setCategory(menuItem.get().getCategory());
-        items.setDiscription(menuItem.get().getDiscription());
-        items.setFullprice(fullNewPrice);
-        items.setHalfprice(menuItem.get().getHalfprice());
-
-        menuRepo.save(items);
-
-        return ResponseEntity.ok("Update Successfully");
-    }
 
     public List<MenuItem> showAllItem() {
         return menuRepo.findAll();
