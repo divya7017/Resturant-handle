@@ -22,6 +22,9 @@ public class AdminController {
         return userService.getAllApprovUser();
     }
 
-
-
+    @PostMapping("/signup")
+    public String newUser(@RequestBody User user) {
+        userService.createNewUser(user);
+        return "User registered successfully!";
+    }
 }

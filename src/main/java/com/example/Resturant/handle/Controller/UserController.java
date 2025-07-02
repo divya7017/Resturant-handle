@@ -34,11 +34,6 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
 
-    @PostMapping("/signup")
-    public String newUser(@RequestBody User user) {
-        userService.createNewUser(user);
-        return "User registered successfully!";
-    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LogInRequest loginRequest) {
