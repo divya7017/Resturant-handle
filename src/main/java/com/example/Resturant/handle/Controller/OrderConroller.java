@@ -4,8 +4,11 @@ import com.example.Resturant.handle.Entity.DishItem;
 import com.example.Resturant.handle.Entity.Orders;
 import com.example.Resturant.handle.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/Order")
@@ -28,5 +31,10 @@ public class OrderConroller {
     @DeleteMapping("/deleteDish")
     public ResponseEntity<String> deleteDishItem(@RequestParam String orderid, @RequestParam String dishName) {
         return orderService.deleteDishItem(orderid, dishName);
+    }
+
+    @GetMapping("/getAll")
+    public List<Orders> getAllData(){
+        return orderService.getAllItem();
     }
 }

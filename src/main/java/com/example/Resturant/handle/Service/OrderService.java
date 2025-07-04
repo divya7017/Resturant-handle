@@ -81,4 +81,7 @@ public class OrderService {
         return ResponseEntity.ok("Dish removed successfully from order");
     }
 
+    public List<Orders> getAllItem() {
+        return orderRepo.findAll();
+    }
 }
