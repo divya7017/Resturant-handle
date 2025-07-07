@@ -23,8 +23,7 @@ public class AdminController {
     }
 
     @PostMapping("/signup")
-    public String newUser(@RequestBody User user) {
-        userService.createNewUser(user);
-        return "User registered successfully!";
+    public ResponseEntity<String> newUser(@RequestBody User user) {
+        return userService.createNewUser(user);
     }
 }
