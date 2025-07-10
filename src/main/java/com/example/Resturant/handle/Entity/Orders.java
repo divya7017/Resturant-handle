@@ -6,6 +6,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Data
@@ -23,9 +26,9 @@ public class Orders {
     private String customer;
     private String phone;
     private String status;
-    private String time;
+    private LocalDateTime time;
     private String notes;
     private String table;
-    private String createAt;
-    private String updateAt;
+    private LocalDateTime createAt;
+    private LocalDateTime updateAt;
 }
