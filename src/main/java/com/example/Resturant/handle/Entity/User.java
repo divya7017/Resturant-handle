@@ -19,4 +19,15 @@ public class User {
   private String email;
   private String role;
   private LocalDate signupDate;
+  private String status ;
+  private String lastLogin;
+
+  public void setLastLogin() {
+    this.lastLogin = "null";
+  }
+
+  private void setStatus(){
+    this.status ="NotActive";
+  }
+
 }

@@ -20,4 +20,12 @@ public class Orders {
     private int tableNo;
     private List<DishItem> orders;
     private double totalPrice;
+    private String customer;
+    private String phone;
+    private String status;
+    private String time;
+    private String notes;
+    private String table;
+    private String createAt;
+    private String updateAt;
 }
