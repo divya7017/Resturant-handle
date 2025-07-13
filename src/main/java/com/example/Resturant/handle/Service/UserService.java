@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -53,6 +54,15 @@ public class UserService {
     }
 
 
+    @Transactional
+    public ResponseEntity<String> deleteUser(String username) {
+        int result = userRepo.deleteByUsername(username);
+        if (result > 0) {
+            return ResponseEntity.ok("username Deleted");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("unable to delete username");
+        }
+    }
 
 
 

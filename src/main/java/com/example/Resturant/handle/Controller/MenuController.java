@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/menu")
+@RequestMapping("menu")
 public class MenuController {
 
     @Autowired
     private MenuService menuService;
 
-    @PostMapping("/add")
+    @PostMapping("/admin/addMenu")
     public ResponseEntity<String> addMenu(@RequestBody MenuItem menuItem){
         return menuService.addMenuItem(menuItem);
     }
@@ -25,12 +25,12 @@ public class MenuController {
         return menuService.showAllItem();
     }
 
-    @DeleteMapping("/deleteItem/{name}")
+    @DeleteMapping("/admin/deleteItem/{name}")
     public ResponseEntity<String> deleteItem(@PathVariable String name){
         return menuService.deleteMenuItem(name);
     }
 
-    @PatchMapping("/pricechange/{name}")
+    @PatchMapping("/admin/pricechange/{name}")
     public ResponseEntity<String> changeFullPrice(@PathVariable String name , @RequestParam String price){
         return menuService.menuPriceChange(name,price);
     }
