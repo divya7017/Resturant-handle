@@ -28,7 +28,6 @@ public class Orders {
     private String status;
     private LocalDateTime time;
     private String notes;
-    private String table;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
 }

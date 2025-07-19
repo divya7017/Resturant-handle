@@ -10,10 +10,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class TableBook {
 
     private ObjectId id;
-    private int tableNo;
+    private final int tableNo;
     private String tableState;
+    private String bookedBy;
     private String customerName;
     private String customerNumber;
     private int guestNo;
-    private int chairNo;
+    private final int chairNo;
+    private String orderId;
 }
